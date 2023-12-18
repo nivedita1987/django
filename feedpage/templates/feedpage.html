@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+
+</head>
+<body>
+<div class="text-center p-2">
+    <div class="bi-facebook"></div>
+<h1>What's in your Feed</h1>
+<p class="text-muted">Manage whose posts you see in Feed.<b>Learn how Feed works.</b> </p>
+</div>
+<form method="post" action="{% url 'savecomment' %}">
+    {% csrf_token %}
+<div class="row mx-5 my-2">
+    <div class="col-12">
+        <textarea class="form-control"  name="comment" rows="2" placeholder="Write the comment"></textarea>
+        
+    </div>
+</div>
+
+    <div class="row g-3 mx-5">
+        <div class="col-3">
+            <input type="text" class="form-control" name="name" placeholder="Your Name">  
+            
+        </div>
+        <div class="col-2">
+            <input type="submit"  class="form-control btn btn-primary my-1" value="Post The comment">
+           
+        </div>
+        
+        <div class="col-4">
+          
+             <p>{{n}}</p>  
+        </div>
+  </div>
+  </form>
+  <form method="get">
+  <div class="row  align-items-center g-1 mx-5">
+    <div class="col-1"><b>Sort By:</b></div>
+    
+    <div class="col-2"><input type="radio" id="r" name="r" value="1">Ascending order</div>
+    <div class="col-2"><input  type="radio" id="r" name="r" value="2">Descending order</div>
+  
+   <div class="col-2  ">
+        
+        <input type="text" name="comment1n" class="form-control" placeholder="search by keyword">
+        </div>
+        <div class="col-2 mx-5">
+        <input  type="submit" value="go" class="btn btn-primary">
+   
+    </div>
+  </div>
+</form>
+<div class="container-fluid"><div class="row g-3 mx-5 my-1">
+{% for n in Comment1Datafinal %}
+  
+    <div class="col-3 m-2">
+       <label><b>{{n.comment1_n}}</b></label>
+       <textarea class="form-control" rows=3 readonly>{{n.comment1_d}}</textarea>
+       <a href="/delete/{{n.id}}"><span class="btn btn-warning">Delete</span></a> <a href="like/"><span class="bi-hand-thumbs-up-fill"></span></a>  
+      
+    
+    </div>
+    {% endfor %}
+</div>
+</div>
+<div class="container-fluid mx-5 p-3">
+
+    <!-- Declare the pagination class -->
+    <ul class="pagination">
+        <!-- Declare the item in the group -->
+        {% if Comment1Datafinal.has_previous %}
+        <li class="page-item">
+            <!-- Declare the link of the item -->
+            <a class="page-link" href="/?page={{Comment1Datafinal.previous_page_number}}">Previous</a>
+        </li>
+        <!-- Rest of the pagination items -->
+        {% endif %}
+        <li class="page-item">
+            <a class="page-link" href="/?page=1">1</a>
+        </li>
+       
+        <li class="page-item">
+            <a class="page-link" href="/?page=2">2</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="/?page=3">3</a>
+        </li>
+        {% if Comment1Datafinal.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="/?page={{Comment1Datafinal.next_page_number}}">Next</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+</body>
+</html>

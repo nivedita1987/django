@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1 class="text-center">Registration</h1>
+    <form method="post" action="{% url 'registerinformation' %}">
+        {% csrf_token %}
+        
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label" for="fn">First Name:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="fn" name="fn" placeholder="First Name" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label" for="ea">Email Address:</label>
+            <div class="col-sm-9">
+                <input type="email" class="form-control" id="ea" name="ea" placeholder="Email Address" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label" for="pa">Postal Address:</label>
+            <div class="col-sm-9">
+                <textarea rows="3" class="form-control" id="pa" name="pa" placeholder="Postal Address" required></textarea>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-sm-9 offset-sm-3">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="reset" class="btn btn-secondary ms-2" value="Reset">
+            </div>
+            {{n}}
+        </div>
+    </form>
+    
+</body>
+</html>
